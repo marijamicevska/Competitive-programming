@@ -1,0 +1,33 @@
+#include <stdio.h>
+#define Print printf("%d",username);
+int main()
+{
+int br,den,mesec,godina,username;
+printf("Vnesete maticen broj: ");
+scanf("%d",&br); //7 cifrenDDMMXXX
+den=br/100000;
+mesec=(br/1000)%100;
+godina=1000+(br%1000);
+username=(den*100)+(mesec*1000)+godina;
+if (username>9999&&username<100000)
+Print;
+if(username>999&&username<10000)
+{
+if(godina<1950)
+{
+username=br*10+1;
+Print;
+}
+if(godina>=1951&&godina<=1980)
+{
+username=br*10+2;
+Print;
+}
+if(godina>=1981&&godina<=1999)
+{
+username=br*10+3;
+Print;
+}
+}
+return 0;
+}

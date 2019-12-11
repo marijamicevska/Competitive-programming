@@ -1,0 +1,33 @@
+/*Благ број е број што е составен само од парни цифри (0, 2, 4, 6, 8).
+Во зададен опсег (почетокот m и крајот на опегот n се цели броеви чија вредност се внесува од тастатура),
+да се најде и испечати најмалиот „благ број“. Ако не постои таков број, да се испечати NE.*/
+
+#include <stdio.h>
+int main() {
+    int m,n,cifra;
+    int blagbroj;
+    int brojcifri;
+    scanf("%d%d",&m,&n);
+    int i;
+
+    for(i=m; i<=n; i++) {
+        blagbroj=0;
+        brojcifri=0;
+        int temp=i;
+        int br=i;
+        while(temp>0) {
+            brojcifri++;
+            if((temp%10)%2==0)
+                blagbroj++;
+            temp/=10;
+        }
+        if(blagbroj==brojcifri) {
+            printf("%d",br);
+            break;
+        }
+
+    }
+    if(blagbroj!=brojcifri)
+        printf("NE");
+    return 0;
+}

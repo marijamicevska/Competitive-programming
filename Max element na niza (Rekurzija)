@@ -1,0 +1,21 @@
+#include <stdio.h>
+int maxelement(int *niza,int n,int max)
+{
+    if(n==0) return max;
+    if(niza[n]>max) max=niza[n];
+    maxelement(niza,n-1,max);
+    
+}
+int main()
+{
+    int a[100];
+    int n,i;
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    printf("%d",maxelement(a,n-1,0));
+
+    return 0;
+}

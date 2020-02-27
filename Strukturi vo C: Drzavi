@@ -1,0 +1,63 @@
+//zadaca 5 auditoriski
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+typedef struct grad
+{
+    char ime[30];
+    int ziteligrad;
+} grad;
+typedef struct pretsedatel
+{
+    char ime[30];
+    char prezime[30];
+} pretsedatel;
+typedef struct drzava
+{
+    char ime[30];
+    pretsedatel president;
+    grad glavengrad;
+    int zitelidrzava;
+} drzava;
+
+
+void pecatipretsedatel(drzava *d,int n)
+{
+    int i;
+    char max_ime[100];
+    int max_ziteli;
+    max_ziteli=d[0].glavengrad.ziteligrad;
+    for(i=1;i<n;i++)
+    {
+        if(d[i].glavengrad.ziteligrad>max_ziteli)
+        {
+            max_ziteli=d[i].glavengrad.ziteligrad;
+            strcpy(max_ime,d[i].president.ime);
+        }
+    }
+    puts(max_ime);
+
+}
+int main()
+{
+    drzava drzavi[100];
+    int n;
+    scanf("%d",&n);
+    int i;
+    for(i=0;i<n;i++)
+    {
+        printf("Vnesete ime na drzavata: ");
+        scanf("%s",drzavi[i].ime);
+        printf("\nVnesete ime na glavniot grad: ");
+        scanf("%s",drzavi[i].glavengrad.ime);
+        printf("\nVnesete broj na ziteli na gradot: ");
+        scanf("%d",&drzavi[i].glavengrad.ziteligrad);
+        printf("Vnesete ime i prezime na pretsedatelot: ");
+        scanf("%s%s",drzavi[i].president.ime,drzavi[i].president.prezime);
+        printf("Vnesete broj na ziteli na drzavata: ");
+        scanf("%d",&drzavi[i].zitelidrzava);
+    }
+    pecatipretsedatel(drzavi,n);
+    return 0;
+}

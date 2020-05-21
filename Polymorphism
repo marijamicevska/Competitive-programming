@@ -1,0 +1,104 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+class Shape {
+protected:
+    int a;
+public:
+    Shape() {}
+    Shape(int a) {
+        this->a=a;
+    }
+    virtual double plostina()=0;
+    virtual void pecati()=0;
+    virtual int getType()=0;
+};
+class Square : public Shape {
+private:
+public:
+    Square(int a):Shape(a) {};
+    double plostina() {
+        return a*a;
+    }
+    void pecati() {
+        cout<<"Kvadrat so plostina = "<<plostina()<<endl;
+    }
+    int getType() {
+        return 1;
+    }
+};
+class Circle : public Shape {
+private:
+public:
+    Circle(int a):Shape(a) {};
+    double plostina() {
+        return 3.14*a*a;
+    }
+    void pecati() {
+        cout<<"Krug so plostina = "<<plostina()<<endl;
+    }
+    int getType() {
+        return 2;
+    }
+};
+class Triangle : public Shape {
+private:
+public:
+    Triangle(int a):Shape(a) {};
+    double plostina() {
+        return (sqrt(3)/4) * a * a;
+    }
+    void pecati() {
+        cout<<"Triagolnik so plostina = "<<plostina()<<endl;
+    }
+    int getType() {
+        return 3;
+    }
+};
+void checkNumTypes(Shape** niza, int n) {
+    int kvadrati=0;
+    int triagolnici=0;
+    int krugovi=0;
+    for(int i=0; i<n; i++) {
+        Square *ptr1=dynamic_cast<Square *>(niza[i]);
+        if(ptr1!=NULL) kvadrati++;
+        Triangle *ptr2=dynamic_cast<Triangle *>(niza[i]);
+        if(ptr2!=NULL) triagolnici++;
+        Circle *ptr3=dynamic_cast<Circle *>(niza[i]);
+        if(ptr3!=NULL) krugovi++;
+    }
+    cout<<"Broj na kvadrati vo nizata = "<<kvadrati<<endl;
+    cout<<"Broj na krugovi vo nizata = "<<krugovi<<endl;
+    cout<<"Broj na triagolnici vo nizata = "<<triagolnici<<endl;
+}
+int main() {
+    int n;
+    cin >> n;
+    Shape **niza=new Shape *[n];
+    int classType;
+    int side;
+    for(int i = 0; i < n; ++i) {
+
+        cin >> classType;
+        cin >> side;
+        if (classType==1) {
+            Square * square = new Square(side);
+            niza[i]=square;
+        } else if(classType==2) {
+            Circle *circle = new Circle(side);
+            niza[i]=circle;
+        } else {
+            Triangle *tr=new Triangle(side);
+            niza[i]=tr;
+        }
+    }
+    for(int i = 0; i < n; ++i) {
+
+        niza[i]->pecati();
+    }
+
+    checkNumTypes(niza, n);
+
+delete [] niza;
+    return 0;
+}

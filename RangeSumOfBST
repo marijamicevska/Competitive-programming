@@ -1,0 +1,26 @@
+//credit: dr_popov
+
+    class Solution {
+        
+        List<Integer> intList = new ArrayList<>();
+
+        public void preorderTraversal(TreeNode node){
+            if(node!=null){
+                intList.add(node.val);
+                preorderTraversal(node.left);
+                preorderTraversal(node.right);
+            }
+        }
+        
+        public int rangeSumBST(TreeNode root, int low, int high) {
+            preorderTraversal(root);
+
+            int sum=0;
+            for(int i=0;i<intList.size();i++){
+                if(intList.get(i)>=low && intList.get(i)<=high) sum+= intList.get(i);
+            }
+            
+            return sum;
+        }
+        
+    }
